@@ -6,8 +6,6 @@ theme:
   name: material
   language: zh
   features:
-    - navigation.sections
-    - navigation.indexes
     - navigation.top
     - search.suggest
     - search.highlight
@@ -28,3 +26,20 @@ markdown_extensions:
 
 nav:
   - 前言: index.md
+  - 随机过程:
+      - 概览: stochastic-process/index.md
+      - 学习经历: stochastic-process/experience.md
+      - 笔记: stochastic-process/notes.md
+      - 习题解答: stochastic-process/exercises.md
+
+  - 操作系统:
+      - 概览: operating-system/index.md
+      - 学习经历: operating-system/experience.md
+      - 笔记: operating-system/notes.md
+      - 习题解答: operating-system/exercises.md
+
+  - 算法竞赛:
+      - 概览: competitive-programming/index.md
+      - 学习经历: competitive-programming/experience.md
+      - 笔记: competitive-programming/notes.md
+      - 习题解答: competitive-programming/exercises.md
