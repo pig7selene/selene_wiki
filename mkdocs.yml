@@ -20,26 +20,35 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.highlight
   - pymdownx.inlinehilite
+  - pymdownx.arithmatex:
+      generic: true
+  - attr_list
   - tables
   - toc:
       permalink: true
 
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
 nav:
   - 前言: index.md
+
   - 随机过程:
-      - 概览: stochastic-process/index.md
-      - 学习经历: stochastic-process/experience.md
-      - 笔记: stochastic-process/notes.md
-      - 习题解答: stochastic-process/exercises.md
+      - 前言: stochastic-process/index.md
+      - 笔记:
+          - 有限状态马尔可夫链: stochastic-process/notes/finite-state-Markov-chain.md
+      - 习题: stochastic-process/exercises.md
 
   - 操作系统:
-      - 概览: operating-system/index.md
-      - 学习经历: operating-system/experience.md
+      - 前言: operating-system/index.md
       - 笔记: operating-system/notes.md
       - 习题解答: operating-system/exercises.md
 
   - 算法竞赛:
-      - 概览: competitive-programming/index.md
-      - 学习经历: competitive-programming/experience.md
+      - 前言: competitive-programming/index.md
       - 笔记: competitive-programming/notes.md
       - 习题解答: competitive-programming/exercises.md
