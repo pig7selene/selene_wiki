@@ -1,0 +1,11 @@
+.arithmatex {
+  margin: 0.4em 0 !important;
+}
+
+mjx-container[display="true"] {
+  margin: 0.4em 0 !important;
+}
+.center {
+  display: block;
+  margin: 0 auto;
+}
