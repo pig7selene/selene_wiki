@@ -50,5 +50,7 @@ nav:
 
   - 算法竞赛:
       - 前言: competitive-programming/index.md
-      - 笔记: competitive-programming/notes.md
+      - 笔记:
+          - 数学:
+              - 数论: competitive-programming/notes/math/shulun.md
       - 习题解答: competitive-programming/exercises.md
