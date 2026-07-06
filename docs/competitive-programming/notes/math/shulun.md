@@ -166,7 +166,7 @@ int exgcd(int a, int b, int &x, int &y) {
 
 第二种情况是在说，如果 $k < \varphi(m)$，那么，就无需继续降幂，直接应用快速幂即可；而第三种和第一种情形的最大区别是，通过取余降幂之后，是否需要加上一项 $\varphi(m)$。当然，将第一种情形合并进入第二、三种情形也是正确的。
 
-## 中国剩余定理(CRT)/扩展中国剩余定理(exCRT)
+## 中国剩余定理(CRT)
 
 求解线性同余方程组
 
@@ -204,6 +204,72 @@ LL CRT(int k, LL* a, LL* r) {
     ans = (ans + a[i] * m * b % n) % n;
   }
   return (ans % n + n) % n;
+}
+```
+
+## 扩展中国剩余定理(exCRT)
+
+前两个方程：$x \equiv r_1 \pmod {m_1},\qquad x \equiv r_2 \pmod {m_2}$
+
+转化为不定方程：$x = m_1p + r_1 = m_2q + r_2$
+
+则 $m_1p - m_2q = r_2 - r_1$
+
+由裴蜀定理，
+
+当 $gcd(m_1,m_2) \nmid (r_2 - r_1)$ 时，无解
+
+当 $gcd(m_1,m_2) \mid (r_2 - r_1)$ 时，有解
+
+由扩欧算法，
+
+得特解$p = p * \frac{r_2 - r_1}{gcd},\qquad q = q * \frac{r_2 - r_1}{gcd}$
+
+其通解$P = p + \frac{m_2}{gcd} * k,\qquad Q = q - \frac{m_1}{gcd} * k$
+
+所以$x = m_1P + r_1 = \frac{m_1m_2}{gcd} * k + m_1p + r_1$
+
+前两个方程**等价合并**为一个方程 $x \equiv r \pmod m$，其中$r = m_1p + r_1, m = lcm(m_1,m_2)$
+
+所以 $n$ 个同余方程只要合并 $n - 1$ 次，即可求解
+
+```cpp
+LL exgcd(LL a,LL b,LL &x,LL &y){
+    if(!b){
+        x = 1,y = 0;
+        return a;
+    }
+    LL g = exgcd(b,a % b,y,x);
+    y -= a / b * x;
+    return g;
+}
+
+LL mod(LL x,LL p){
+    return (x % p + p) % p;
+}
+
+LL exCRT(int k,LL *a,LL *r){
+    LL ans = a[1], n = r[1];
+
+    for(int i = 2;i <= k;i++){
+        LL b, y;
+        LL c = a[i] - ans;
+
+        LL g = exgcd(n,r[i],b,y);
+
+        if(c % g) return -1;
+
+        LL t = r[i] / g;
+
+        b = mod((i128)(c / g) * b % t,t);
+
+        ans = ans + (i128)n * b;
+        n = (i128)n / g * r[i];
+
+        ans = mod(ans,n);
+    }
+
+    return ans;
 }
 ```
 
