@@ -2,54 +2,66 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/exercises/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/experience/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
+    </url>
+    <url>
+         <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/notes/string/</loc>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/notes/math/shulun/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
+    </url>
+    <url>
+         <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/notes/math/zuhe/</loc>
+         <lastmod>2026-07-08</lastmod>
+    </url>
+    <url>
+         <loc>https://pig7selene.github.io/selene_wiki/competitive-programming/notes/shujujiegou/jichu/</loc>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/operating-system/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/operating-system/exercises/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/operating-system/experience/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/operating-system/notes/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/stochastic-process/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/stochastic-process/exercises/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/stochastic-process/experience/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
     <url>
          <loc>https://pig7selene.github.io/selene_wiki/stochastic-process/notes/finite-state-Markov-chain/</loc>
-         <lastmod>2026-07-06</lastmod>
+         <lastmod>2026-07-08</lastmod>
     </url>
 </urlset>
