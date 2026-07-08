@@ -9,3 +9,18 @@ mjx-container[display="true"] {
   display: block;
   margin: 0 auto;
 }
+
+.toc-collapsible > .md-nav__link::before {
+  content: "›";
+  display: inline-block;
+  margin-right: 0.4em;
+  transition: transform 0.2s;
+}
+
+.toc-collapsible.toc-open > .md-nav__link::before {
+  transform: rotate(90deg);
+}
+
+.toc-collapsible > .md-nav__link {
+  cursor: pointer;
+}

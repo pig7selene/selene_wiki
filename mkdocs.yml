@@ -26,12 +26,14 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
+      toc_depth: 3
 
 extra_css:
   - stylesheets/extra.css
 
 extra_javascript:
   - javascripts/mathjax.js
+  - javascripts/toc-collapse.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
@@ -53,4 +55,8 @@ nav:
       - 笔记:
           - 数学:
               - 数论: competitive-programming/notes/math/shulun.md
+              - 组合数学: competitive-programming/notes/math/zuhe.md
+          - 字符串: competitive-programming/notes/string.md
+          - 数据结构:
+              - 部分数据结构与 STL: competitive-programming/notes/shujujiegou/jichu.md
       - 习题解答: competitive-programming/exercises.md

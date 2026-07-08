@@ -122,7 +122,7 @@ int exgcd(int a, int b, int &x, int &y) {
 
 ## 费马小定理
 
-!!! info "Definition：费马小定理"
+!!! info "费马小定理"
 
     1. 设 $p$ 是素数。对于任意整数 $a$ 且 $p \nmid a$，都有
     
@@ -142,7 +142,7 @@ int exgcd(int a, int b, int &x, int &y) {
 
 欧拉定理将费马小定理推广到了一般模数的情况，但仍然要求底数与指数互素
 
-!!! info "Definition：欧拉定理"
+!!! info "欧拉定理"
 
     对于整数 $m > 0$ 和整数 $a$，且 $gcd(a,m) = 1$，有 $a^{\varphi(m)} \equiv 1 \pmod m$，其中，$\varphi(\cdot)$ 为欧拉函数。
 
@@ -150,7 +150,7 @@ int exgcd(int a, int b, int &x, int &y) {
 
 扩展欧拉定理进一步将结论推广到了底数与指数不互素的情况。由此，它彻底解决了任意模数下任意底数的幂次计算问题，将它们转化为指数小于 $2\varphi(m)$ 的情形，从而可以通过快速幂在 $O(\log \varphi(m))$ 时间内计算。
 
-!!! info "Definition：扩展欧拉定理"
+!!! info "扩展欧拉定理"
 
     对于任意正整数 $m$、整数 $a$ 和非负整数 $k$，有
     
@@ -273,3 +273,300 @@ LL exCRT(int k,LL *a,LL *r){
 }
 ```
 
+
+
+## 卢卡斯定理
+
+首先讨论模数为素数 $p$ 的情形
+
+!!! info "卢卡斯定理"
+
+    对于素数 $p$，有
+    
+    $$
+    \binom{n}{k} \equiv 
+    \binom{\lfloor n/p \rfloor}{\lfloor k/p \rfloor}
+    \binom{n \bmod p}{k \bmod p}
+    \pmod p.
+    $$
+    
+    其中，当 $n < k$ 时，二项式系数 $\binom{n}{k}$ 规定为 $0$。
+
+卢卡斯定理指出，模数为素数 $p$ 的时候，大组合数的计算可以转化为规模更小的组合数的计算。在右式中，第一个组合数可以继续递归，直到 $n,k < p$ 为止；第二个组合数可以直接计算，或者预处理出来
+
+```cpp
+long long Lucas(long long n, long long k, long long p) {
+  if (k == 0) return 1;
+  return (C(n % p, k % p, p) * Lucas(n / p, k / p, p)) % p;
+}
+```
+
+
+
+## 整除分块
+
+求   $\sum_{i=1}^{n} \left\lfloor \frac{n}{i} \right\rfloor$ 
+
+**性质1：分块的块数 $\le 2\lfloor \sqrt n \rfloor$**
+
+当 $i \le \lfloor \sqrt n \rfloor$ 时，$\left\lfloor \dfrac{n}{i} \right\rfloor$ 有 $\lfloor \sqrt n \rfloor$ 种取值。
+
+当 $i > \lfloor \sqrt n \rfloor$ 时，$\left\lfloor \dfrac{n}{i} \right\rfloor \le \lfloor \sqrt n \rfloor$，$\left\lfloor \dfrac{n}{i} \right\rfloor$ 至多有 $\lfloor \sqrt n \rfloor$ 种取值。
+
+**性质2：$i$ 所在块的右端点为 $\left\lfloor \dfrac{n}{\left\lfloor n/i \right\rfloor} \right\rfloor$**
+
+$i$ 所在块的值 $k = \left\lfloor \dfrac{n}{i} \right\rfloor$，则 $k \le \dfrac{n}{i}$，则 $\left\lfloor \frac{n}{k} \right\rfloor
+\ge
+\left\lfloor \frac{n}{n/i} \right\rfloor
+=
+\lfloor i \rfloor
+=
+i$，所以 $i_{max}
+=
+\left\lfloor \frac{n}{k} \right\rfloor
+=
+\left\lfloor \frac{n}{\left\lfloor n/i \right\rfloor} \right\rfloor$，代码实现时，右端点
+
+$r = n / (n / l)$;
+
+```cpp
+ll calc(ll n) {
+    ll ans = 0;
+
+    for(ll l = 1,r;l <= n;l = r + 1) {
+        ll k = n / l;      // 当前块的值 floor(n / i)
+        r = n / k;         // 当前块的右端点
+
+        ans += (r - l + 1) * k;
+    }
+
+    return ans;
+}
+```
+
+
+
+## 狄利克雷卷积
+
+数列 $\langle a_1,a_2,a_3,\cdots\rangle$ 的**狄利克雷生成函数**
+
+$$
+F(x)=\frac{a_1}{1^x}+\frac{a_2}{2^x}+\frac{a_3}{3^x}+\cdots
+=\sum_{n=1}^{\infty}\frac{a_n}{n^x}
+$$
+
+**乘法运算**
+
+
+$$
+\begin{aligned}
+&\sum_{i=1}^{\infty}\frac{a_i}{i^x}
+\sum_{j=1}^{\infty}\frac{b_j}{j^x}
+\\[8pt]
+=&
+\left(
+\frac{a_1}{1^x}
++\frac{a_2}{2^x}
++\frac{a_3}{3^x}
++\frac{a_4}{4^x}
++\cdots
+\right)
+\left(
+\frac{b_1}{1^x}
++\frac{b_2}{2^x}
++\frac{b_3}{3^x}
++\frac{b_4}{4^x}
++\cdots
+\right)
+\\[8pt]
+=&
+\frac{a_1b_1}{1^x}
++
+\frac{a_1b_2+a_2b_1}{2^x}
++
+\frac{a_1b_3+a_3b_1}{3^x}
++
+\frac{a_1b_4+a_2b_2+a_4b_1}{4^x}
++\cdots
+\\[8pt]
+=&
+\sum_{n=1}^{\infty}
+\frac{1}{n^x}
+{\sum_{d\mid n}a_db_{\frac{n}{d}}}
+\end{aligned}
+$$
+
+
+**欧拉函数**
+
+定义
+
+
+$$
+\varphi(n)=\sum_{i=1}^{n}[\gcd(i,n)=1]
+$$
+
+
+
+性质
+
+
+$$
+\sum_{d\mid n}\varphi(d)=n
+$$
+
+
+
+**莫比乌斯函数**
+
+定义
+
+
+$$
+\mu(n)=
+\begin{cases}
+1, & n=1 \\
+(-1)^s, & n=p_1p_2\cdots p_s \\
+0, & n\text{ 包含相同质因子}
+\end{cases}
+$$
+
+
+
+性质
+
+
+$$
+\sum_{d\mid n}\mu(d)=[n=1]
+$$
+
+
+
+联系
+
+
+$$
+{\sum_{d\mid n}\mu(d)\frac{n}{d}=\varphi(n)}
+$$
+
+
+**狄利克雷卷积**
+
+定义
+
+$f(n), g(n)$ 是两个积性函数，
+
+
+$$
+(f * g)(n)
+=
+\sum_{d\mid n} f(d)g\left(\frac{n}{d}\right)
+=
+\sum_{d\mid n} f\left(\frac{n}{d}\right)g(d)
+$$
+
+
+
+规律
+
+1. 交换律：$f * g = g * f$
+
+2. 结合律：$(f * g) * h = f * (g * h)$
+
+3. 分配律：$(f + g) * h = f * h + g * h$
+
+三个常用函数
+
+1. 元函数 $\varepsilon(n)=[n=1]$
+
+2. 常数函数 $1(n)=1$
+
+3. 恒等函数 $id(n)=n$
+
+常用卷积关系
+
+1.$\sum_{d\mid n}\mu(d)=[n=1]
+\Longleftrightarrow
+\mu * 1 = \varepsilon$
+
+2.$\sum_{d\mid n}\varphi(d)=n
+\Longleftrightarrow
+\varphi * 1 = id$
+
+3.$\sum_{d\mid n}\mu(d)\frac{n}{d}=\varphi(n)
+\Longleftrightarrow
+\mu * id = \varphi\sum_{d\mid n}\mu(d)\frac{n}{d}=\varphi(n)
+\Longleftrightarrow
+\mu * id = \varphi$
+
+4.$\sum_{d\mid n}\mu(d)\frac{n}{d}=\varphi(n)
+\Longleftrightarrow
+\mu * id = \varphi\sum_{d\mid n}\mu(d)\frac{n}{d}=\varphi(n)
+\Longleftrightarrow
+\mu * id = \varphi$
+
+5.$f * 1 \ne f=
+\sum_{d\mid n}f(d)$
+
+
+
+## 莫比乌斯反演
+
+$$
+{
+f(n)=\sum_{d\mid n}g(d)
+\Longleftrightarrow
+g(n)=\sum_{d\mid n}\mu(d)f\left(\frac{n}{d}\right)
+}
+$$
+
+$f(n),g(n)$ 均为积性函数，  
+$f(n)$ 称为 $g(n)$ 的莫比乌斯变换，  
+$g(n)$ 称为 $f(n)$ 的莫比乌斯逆变换。
+
+**方法一**
+
+若 $f=g*1$，则
+
+
+$$
+\mu*f=\mu*g*1=g*\mu*1=g*\varepsilon=g
+$$
+
+
+
+若 $g=\mu*f$，则
+
+
+$$
+g*1=\mu*f*1=f*\mu*1=f*\varepsilon=f
+$$
+
+
+
+**方法二**
+
+
+$$
+\begin{aligned}
+\sum_{d\mid n}\mu(d)f\left(\frac{n}{d}\right)
+&=
+\sum_{d\mid n}\mu(d)
+\sum_{k\mid \frac{n}{d}}g(k)
+\\[8pt]
+&=
+\sum_{d\mid n}
+\sum_{k\mid \frac{n}{d}}
+\mu(d)g(k)
+=
+\sum_{k\mid n}
+\sum_{d\mid \frac{n}{k}}
+\mu(d)g(k)
+\\[8pt]
+&=
+\sum_{k\mid n}g(k)
+\sum_{d\mid \frac{n}{k}}\mu(d)
+=
+g(n)
+\end{aligned}
+$$
